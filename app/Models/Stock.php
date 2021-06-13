@@ -18,8 +18,8 @@ class Stock extends Model
         'stock_category_id',
         'uom',
         'barcode',
-        'discontinued'
-
+        'discontinued',
+        'photo_path'
     ];
 
     public function stock_category(){

@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Stock;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Redirect;
 
 class StockController extends Controller
 {
@@ -62,7 +64,7 @@ class StockController extends Controller
 
         $model->save();
 
-        return redirect()->back()->with('success', 'New Stock Category Added!');
+        return redirect()->back()->with('success', 'New Stock Added!');
 
     }
 
@@ -75,7 +77,9 @@ class StockController extends Controller
      */
     public function show($id)
     {
-        //
+        $model =Stock::find($id);
+
+        return Inertia::render('Stock/View',['model'=>$model]);
     }
 
     /**
@@ -98,7 +102,27 @@ class StockController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validate = $request->validate(
+
+            [
+               
+                'stock_category_id' => 'required',
+                'description' => 'required',
+                'uom' => 'required',
+                'barcode' => 'required',
+                'discontinued' => 'required',
+
+            ]
+
+        );
+
+
+        $model = Stock::find($id);
+
+        $model->update($validate);
+    
+        return redirect()->back()->with('success', 'Stock Updated');
+      //return Redirect::route('stock.index')->with("Success", "Stock Updated");
     }
 
     /**
@@ -109,6 +133,14 @@ class StockController extends Controller
      */
     public function destroy($id)
     {
-        //
+       //use try since an error migth occur
+       try{
+        Stock::find($id)->delete();
+        return Redirect::route('stock.index')->with('success', 'Stocks deleted.');
+       }catch (\Exception$e) {
+     
+        return Redirect::route('stock.index')->with('error', $e->getMessage());
+
+    }
     }
 }

@@ -41,7 +41,7 @@
                             >
                                 <breeze-nav-link
                                     :href="route('stock.index')"
-                                    :active="route().current('dashboard')"
+                                    :active="route().current('stock.index')"
                                 >
                                     Stocks
                                 </breeze-nav-link>

@@ -33,9 +33,9 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')
 ->group(function () {
 
-   // Route::resource('pos', PurchaseOrderController::class);
-  //  Route::resource('prs', PurchaseRequestController::class);
+  
       Route::resource('sc', StockCategoryController::class);
+  //  uncomment this      
       Route::resource('stock', StockController::class);
     
 });

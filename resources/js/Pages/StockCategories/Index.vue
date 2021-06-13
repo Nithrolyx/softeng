@@ -22,6 +22,7 @@
                 <th class="px-4 py-3">Type</th>
                 <th class="px-4 py-3">Stock Account</th>
                 <th class="px-4 py-3">Date Created</th>
+                <th class="px-4 py-3">Action</th>
               </tr>
 
               <tr
@@ -34,6 +35,17 @@
                 <td class="px-4 py-3">{{ item.type }}</td>
                 <td class="px-4 py-3">{{ item.stock_account }}</td>
                 <td class="px-4 py-3">{{ item.created_at }}</td>
+                <td>
+                        <inertia-link :href="route('sc.show',item.id)">
+                          View
+                        </inertia-link>
+
+                            <inertia-link method="delete" :href="route('sc.destroy',item.id)">
+                          Delete
+                        </inertia-link>
+
+
+                </td>
               </tr>
               <!-- each row -->
             </table>

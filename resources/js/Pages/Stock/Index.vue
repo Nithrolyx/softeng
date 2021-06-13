@@ -24,6 +24,7 @@
                 <th class="px-4 py-3">Barcode</th>
                 <th class="px-4 py-3">Discontinued</th>
                 <th class="px-4 py-3">Photo Path</th>
+                <th class="px-4 py-3">Action</th>
               </tr>
 
               <tr
@@ -38,6 +39,17 @@
                 <td class="px-4 py-3">{{ item.barcode }}</td>
                 <td class="px-16 py-3">{{ item.discontinued }}</td>
                 <td class="px-4 py-3">{{ item.photo_path }}</td>
+                <td>
+                        <inertia-link :href="route('stock.show',item.id)">
+                          View
+                        </inertia-link>
+
+                        <inertia-link method="delete" :href="route('stock.destroy',item.id)">
+                          Delete
+                        </inertia-link>
+
+
+                </td>                
               </tr>
               <!-- each row -->
             </table>
